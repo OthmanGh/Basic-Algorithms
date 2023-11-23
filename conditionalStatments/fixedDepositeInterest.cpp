@@ -36,7 +36,7 @@ int main()
     cout << "Enter Tenure (t) : ";
     cin >> t;
 
-    int simple_interest = calc_simple_interest(p, t);
+    float simple_interest = calc_simple_interest(p, t);
 
     cout << "Simple interest obtained : " << simple_interest;
     return 0;
