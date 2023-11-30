@@ -16,15 +16,26 @@ int main()
     std::cout << "Enter element you wanna search for : ";
     std::cin >> key;
 
-    int idx = list.linear_search(key);
+    int idx1 = list.linear_search(key);
 
-    if (idx != -1)
+    if (idx1 != -1)
     {
-        std::cout << key << " is present at index " << idx << std::endl;
+        std::cout << key << " linear search : is present at index " << idx1 << std::endl;
     }
     else
     {
-        std::cout << key << " is not present in the list....";
+        std::cout << key << " linear search : is not present in the list...." << std::endl;
+    }
+
+    int idx2 = list.recursive_search(key);
+
+    if (idx2 != -1)
+    {
+        std::cout << key << " recursive search : is present at index " << idx2 << std::endl;
+    }
+    else
+    {
+        std::cout << key << " recursive search : is not present in the list...." << std::endl;
     }
 
     return 0;

@@ -24,6 +24,26 @@ class LinkedList
     Node *head;
     Node *tail;
 
+    int searchHelper(Node *start, int key)
+    {
+        // Base case
+        if (start == nullptr)
+        {
+            return -1;
+        }
+
+        // value matches
+        if (start->data == key)
+        {
+            return 0;
+        }
+
+        // remaining part of the linked list
+        int subIdx = searchHelper(start->next, key);
+
+        return subIdx == -1 ? -1 : subIdx + 1;
+    }
+
 public:
     // constructor:
     LinkedList() : head(nullptr), tail(nullptr){};
@@ -33,6 +53,7 @@ public:
     void push_back(int);
     void print_list();
     int linear_search(int);
+    int recursive_search(int);
 };
 
 void LinkedList::push_front(int value)
@@ -104,4 +125,10 @@ int LinkedList::linear_search(int key)
         idx += 1;
     }
     return -1;
+}
+
+int LinkedList::recursive_search(int key)
+{
+    int idx = searchHelper(this->head, key);
+    return idx;
 }
