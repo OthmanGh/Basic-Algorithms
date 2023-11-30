@@ -11,5 +11,21 @@ int main()
     list.push_front(40);
 
     list.print_list();
+
+    int key;
+    std::cout << "Enter element you wanna search for : ";
+    std::cin >> key;
+
+    int idx = list.linear_search(key);
+
+    if (idx != -1)
+    {
+        std::cout << key << " is present at index " << idx << std::endl;
+    }
+    else
+    {
+        std::cout << key << " is not present in the list....";
+    }
+
     return 0;
 }

@@ -32,6 +32,7 @@ public:
     void push_front(int);
     void push_back(int);
     void print_list();
+    int linear_search(int);
 };
 
 void LinkedList::push_front(int value)
@@ -86,4 +87,21 @@ void LinkedList::print_list()
         }
         std::cout << "nullptr" << std::endl;
     }
+}
+
+int LinkedList::linear_search(int key)
+{
+    Node *temp = this->head;
+    int idx = 0;
+
+    while (temp != nullptr)
+    {
+        if (temp->data == key)
+        {
+            return idx;
+        }
+        temp = temp->next;
+        idx += 1;
+    }
+    return -1;
 }
