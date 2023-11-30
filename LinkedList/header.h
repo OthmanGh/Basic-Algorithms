@@ -31,6 +31,7 @@ public:
     // Methods :
     void push_front(int);
     void push_back(int);
+    void print_list();
 };
 
 void LinkedList::push_front(int value)
@@ -54,7 +55,7 @@ void LinkedList::push_back(int value)
 {
     Node *n = new Node(value);
 
-    if (this->head = nullptr)
+    if (this->head == nullptr)
     {
         // If the list is empty, set both head and tail to the new node
         this->head = this->tail = n;
@@ -64,5 +65,25 @@ void LinkedList::push_back(int value)
         // If the list is not empty, update the pointers to insert at the back
         this->tail->next = n;
         this->tail = n;
+    }
+}
+
+void LinkedList::print_list()
+{
+    Node *temp = this->head;
+
+    if (temp == nullptr)
+    {
+        // List is empty :
+        std::cout << "List is empty....." << std::endl;
+    }
+    else
+    {
+        while (temp != nullptr)
+        {
+            std::cout << temp->data << " -> ";
+            temp = temp->next;
+        }
+        std::cout << "nullptr" << std::endl;
     }
 }
