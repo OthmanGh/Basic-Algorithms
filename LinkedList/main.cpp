@@ -3,8 +3,7 @@
 
 int main()
 {
-    Node myNode(10);
+    LinkedList list;
 
-    std::cout << myNode.getData();
     return 0;
 }
