@@ -10,8 +10,12 @@ class Node // holds data value and a pointer to the next node element
 public:
     Node(int d) : data(d), next(nullptr){}; // constructor initialization list
 
-    int getData();
     friend LinkedList;
+    // method
+    int getData();
+
+    // destructor:
+    ~Node();
 };
 
 int Node::getData()
@@ -19,11 +23,21 @@ int Node::getData()
     return this->data;
 }
 
+Node::~Node()
+{
+    if (this->next != nullptr) // this will make a recursive call for the next node
+    {
+        delete this->next;
+    }
+    std::cout << "Deleting Node with data " << this->data << " " << std::endl;
+}
+
 class LinkedList
 {
     Node *head;
     Node *tail;
 
+    // private Methods :
     int searchHelper(Node *start, int key)
     {
         // Base case
@@ -52,8 +66,12 @@ public:
     void push_front(int);
     void push_back(int);
     void print_list();
+    void pop_front();
     int linear_search(int);
     int recursive_search(int);
+
+    // destructor :
+    ~LinkedList();
 };
 
 void LinkedList::push_front(int value)
@@ -131,4 +149,28 @@ int LinkedList::recursive_search(int key)
 {
     int idx = searchHelper(this->head, key);
     return idx;
+}
+
+LinkedList::~LinkedList()
+{
+    if (this->head != nullptr)
+    {
+        delete this->head;
+        this->head = nullptr;
+    }
+}
+
+void LinkedList::pop_front()
+{
+    // 1 -  copy head in temporary memory
+    Node *temp = this->head;
+
+    // 2 - move head pointer to the next place
+    this->head = this->head->next;
+
+    // 3 - make next temp equal to null
+    temp->next = nullptr;
+
+    // 4 - Delete temp
+    delete temp;
 }
