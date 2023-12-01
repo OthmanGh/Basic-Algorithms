@@ -65,8 +65,16 @@ public:
     // Methods :
     void push_front(int);
     void push_back(int);
-    void print_list();
+
+    // Homework
+    // insert(pos)
+    // void pop_back()
+    // void remove(pos)
+    void insert(int data, int pos);
+
     void pop_front();
+    void print_list();
+
     int linear_search(int);
     int recursive_search(int);
 
@@ -173,4 +181,24 @@ void LinkedList::pop_front()
 
     // 4 - Delete temp
     delete temp;
+}
+
+void LinkedList::insert(int data, int pos)
+{
+    if (pos == 0)
+    {
+        push_front(data);
+        return;
+    }
+    // Otherwise:
+    Node *temp = head;
+    for (int jump = 1; jump < pos; jump++)
+    {
+        temp = temp->next;
+    }
+
+    Node *n = new Node(data);
+
+    n->next = temp->next;
+    temp->next = n;
 }

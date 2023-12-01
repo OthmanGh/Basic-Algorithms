@@ -9,9 +9,11 @@ int main()
     list.push_front(30);
     list.push_back(20);
     list.push_front(40);
+    list.insert(60, 3);
     list.pop_front(); // 40 will get deleted from the list
-
+    list.insert(70, 0);
     list.print_list();
+    std::cout << std::endl;
 
     int key;
     std::cout << "Enter element you wanna search for : ";
@@ -38,6 +40,7 @@ int main()
     {
         std::cout << "recursive search : " << key << " is not present in the list...." << std::endl;
     }
+    std::cout << std::endl;
 
     return 0;
 }
