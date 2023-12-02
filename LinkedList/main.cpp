@@ -12,8 +12,10 @@ int main()
     list.insert(60, 3);
     list.pop_front(); // 40 will get deleted from the list
     list.insert(70, 0);
-    list.print_list();
     std::cout << std::endl;
+    list.pop_back();
+    std::cout << std::endl;
+    list.print_list();
 
     int key;
     std::cout << "Enter element you wanna search for : ";

@@ -65,19 +65,14 @@ public:
     // Methods :
     void push_front(int);
     void push_back(int);
-
-    // Homework
-    // insert(pos)
-    // void pop_back()
-    // void remove(pos)
     void insert(int data, int pos);
-
     void pop_front();
+    void pop_back();
     void print_list();
-
     int linear_search(int);
     int recursive_search(int);
 
+    // void remove(pos)
     // destructor :
     ~LinkedList();
 };
@@ -116,24 +111,84 @@ void LinkedList::push_back(int value)
     }
 }
 
-void LinkedList::print_list()
+void LinkedList::insert(int data, int pos)
 {
+    if (pos == 0)
+    {
+        push_front(data);
+        return;
+    }
+    // Otherwise:
+    Node *temp = head;
+    for (int jump = 1; jump < pos; jump++)
+    {
+        temp = temp->next;
+    }
+
+    Node *n = new Node(data);
+
+    n->next = temp->next;
+    temp->next = n;
+}
+
+void LinkedList::pop_front()
+{
+    // Check if the list is empty
+    if (this->head == nullptr)
+    {
+        std::cout << "Cannot pop from an empty list." << std::endl;
+        return;
+    }
+
+    // Check if there is only one element in the list
+    if (head->next == nullptr)
+    {
+        delete this->head;
+        this->head = this->tail = nullptr;
+        return;
+    }
+
+    // Copy head in temporary memory
     Node *temp = this->head;
 
-    if (temp == nullptr)
+    // Move head pointer to the next place
+    this->head = this->head->next;
+
+    // Make next temp equal to null
+    temp->next = nullptr;
+
+    // Delete temp
+    delete temp;
+}
+
+void LinkedList::pop_back()
+{
+
+    if (this->head == nullptr)
     {
-        // List is empty :
-        std::cout << "List is empty....." << std::endl;
+        std::cout << "Cannot pop from an empty list." << std::endl;
+        return;
     }
-    else
+
+    // Check if there is only one element in the list
+    if (this->head->next == nullptr)
     {
-        while (temp != nullptr)
-        {
-            std::cout << temp->data << " -> ";
-            temp = temp->next;
-        }
-        std::cout << "nullptr" << std::endl;
+        delete this->head;
+        this->head = this->tail = nullptr;
+        return;
     }
+
+    // Traverse the list to find the last element before the tail
+    Node *temp = this->head;
+    while (temp->next->next != nullptr)
+    {
+        temp = temp->next;
+    }
+
+    std::cout << temp->data << std::endl; // Display the value of the last element
+    delete temp->next;                    // Deallocate memory for the last element
+    temp->next = nullptr;                 // Update the next pointer of the second-to-last element
+    this->tail = temp;                    // Update the tail pointer
 }
 
 int LinkedList::linear_search(int key)
@@ -168,37 +223,22 @@ LinkedList::~LinkedList()
     }
 }
 
-void LinkedList::pop_front()
+void LinkedList::print_list()
 {
-    // 1 -  copy head in temporary memory
     Node *temp = this->head;
 
-    // 2 - move head pointer to the next place
-    this->head = this->head->next;
-
-    // 3 - make next temp equal to null
-    temp->next = nullptr;
-
-    // 4 - Delete temp
-    delete temp;
-}
-
-void LinkedList::insert(int data, int pos)
-{
-    if (pos == 0)
+    if (temp == nullptr)
     {
-        push_front(data);
-        return;
+        // List is empty :
+        std::cout << "List is empty....." << std::endl;
     }
-    // Otherwise:
-    Node *temp = head;
-    for (int jump = 1; jump < pos; jump++)
+    else
     {
-        temp = temp->next;
+        while (temp != nullptr)
+        {
+            std::cout << temp->data << " -> ";
+            temp = temp->next;
+        }
+        std::cout << "nullptr" << std::endl;
     }
-
-    Node *n = new Node(data);
-
-    n->next = temp->next;
-    temp->next = n;
 }
