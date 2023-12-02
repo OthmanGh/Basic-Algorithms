@@ -65,14 +65,14 @@ public:
     // Methods :
     void push_front(int);
     void push_back(int);
-    void insert(int data, int pos);
+    void insert(int, int);
     void pop_front();
     void pop_back();
+    void remove(int);
     void print_list();
     int linear_search(int);
     int recursive_search(int);
 
-    // void remove(pos)
     // destructor :
     ~LinkedList();
 };
@@ -133,7 +133,7 @@ void LinkedList::insert(int data, int pos)
 
 void LinkedList::pop_front()
 {
-    // Check if the list is empty
+    // Check if list is empty
     if (this->head == nullptr)
     {
         std::cout << "Cannot pop from an empty list." << std::endl;
@@ -163,7 +163,7 @@ void LinkedList::pop_front()
 
 void LinkedList::pop_back()
 {
-
+    // Check if the list is empty
     if (this->head == nullptr)
     {
         std::cout << "Cannot pop from an empty list." << std::endl;
@@ -185,10 +185,30 @@ void LinkedList::pop_back()
         temp = temp->next;
     }
 
-    std::cout << temp->data << std::endl; // Display the value of the last element
-    delete temp->next;                    // Deallocate memory for the last element
-    temp->next = nullptr;                 // Update the next pointer of the second-to-last element
-    this->tail = temp;                    // Update the tail pointer
+    // std::cout << temp->data << std::endl; // Display the value of the last element
+    delete temp->next;    // Deallocate memory for the last element
+    temp->next = nullptr; // Update the next pointer of the second-to-last element
+    this->tail = temp;    // Update the tail pointer
+}
+
+void LinkedList::remove(int pos)
+{
+    // Check if list is empty
+    if (this->head == NULL)
+    {
+        std::cout << "Cannot remove from an empty list." << std::endl;
+    }
+
+    // Traverse the list to find the last element before pos
+    Node *temp = this->head;
+    int cnt = 0;
+    while (cnt < pos - 1)
+    {
+        temp = temp->next;
+        cnt++;
+    }
+
+    std::cout << "node value at position : " << pos << " is : " << temp->data << std::endl;
 }
 
 int LinkedList::linear_search(int key)

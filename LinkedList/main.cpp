@@ -16,33 +16,33 @@ int main()
     list.pop_back();
     std::cout << std::endl;
     list.print_list();
+    list.remove(2);
+    // int key;
+    // std::cout << "Enter element you wanna search for : ";
+    // std::cin >> key;
 
-    int key;
-    std::cout << "Enter element you wanna search for : ";
-    std::cin >> key;
+    // int idx1 = list.linear_search(key);
 
-    int idx1 = list.linear_search(key);
+    // if (idx1 != -1)
+    // {
+    //     std::cout << "linear search : " << key << " is present at index " << idx1 << std::endl;
+    // }
+    // else
+    // {
+    //     std::cout << "linear search : " << key << " is not present in the list...." << std::endl;
+    // }
 
-    if (idx1 != -1)
-    {
-        std::cout << "linear search : " << key << " is present at index " << idx1 << std::endl;
-    }
-    else
-    {
-        std::cout << "linear search : " << key << " is not present in the list...." << std::endl;
-    }
+    // int idx2 = list.recursive_search(key);
 
-    int idx2 = list.recursive_search(key);
-
-    if (idx2 != -1)
-    {
-        std::cout << "recursive search : " << key << " is present at index " << idx2 << std::endl;
-    }
-    else
-    {
-        std::cout << "recursive search : " << key << " is not present in the list...." << std::endl;
-    }
-    std::cout << std::endl;
+    // if (idx2 != -1)
+    // {
+    //     std::cout << "recursive search : " << key << " is present at index " << idx2 << std::endl;
+    // }
+    // else
+    // {
+    //     std::cout << "recursive search : " << key << " is not present in the list...." << std::endl;
+    // }
+    // std::cout << std::endl;
 
     return 0;
 }
