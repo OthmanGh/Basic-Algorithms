@@ -49,3 +49,16 @@ A stack is a data structure that follows the Last In, First Out (LIFO) principle
 Think of it like a stack of plates where you can only add or remove plates from the top. The last plate added is the first one to be removed, hence the Last In, First Out order. Stacks are used in various computer science applications, such as function call management, expression evaluation, and undo mechanisms in software.
 
 ---
+
+# 3- Queue Data Structure
+
+A queue is a data structure that follows the First In, First Out (FIFO) principle. In a queue, elements are added at the rear (enqueue) and removed from the front (dequeue). The element that has been in the queue the longest is the first to be removed.
+
+## Key Operations
+
+- **Enqueue:** Adding an element to the rear of the queue.
+- **Dequeue:** Removing the element from the front of the queue.
+- **Front:** Viewing the element at the front of the queue without removing it.
+- **isEmpty:** Checking if the queue is empty.
+
+Think of it like people waiting in line; the first person to arrive is the first to leave the line. Queues are used in various computer science applications, such as process scheduling, print job management, and breadth-first search algorithms.
