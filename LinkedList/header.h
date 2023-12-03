@@ -191,15 +191,16 @@ void LinkedList::pop_back()
     this->tail = temp;    // Update the tail pointer
 }
 
-void LinkedList::remove(int pos)
+void LinkedList::remove(int pos = 0)
 {
     // Check if list is empty
     if (this->head == NULL)
     {
         std::cout << "Cannot remove from an empty list." << std::endl;
+        return;
     }
 
-    // Traverse the list to find the last element before pos
+    // Traverse the list to find last element before pos
     Node *temp = this->head;
     int cnt = 0;
     while (cnt < pos - 1)
@@ -207,8 +208,10 @@ void LinkedList::remove(int pos)
         temp = temp->next;
         cnt++;
     }
-
-    std::cout << "node value at position : " << pos << " is : " << temp->data << std::endl;
+    Node *removedNode = temp->next; // Store the node to be removed, to avoid memory leak
+    temp->next = temp->next->next;  // Adjust the pointers to remove the node from the list
+    removedNode->next = nullptr;    // Set the next pointer of removedNode to null (disconnect from the list)
+    delete removedNode;             // delete removedNode to free up the memory
 }
 
 int LinkedList::linear_search(int key)

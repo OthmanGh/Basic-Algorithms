@@ -8,15 +8,14 @@ int main()
     list.push_back(10);
     list.push_front(30);
     list.push_back(20);
-    list.push_front(40);
+    // list.push_front(40);
     list.insert(60, 3);
-    list.pop_front(); // 40 will get deleted from the list
+    // list.pop_front(); // 40 will get deleted from the list
     list.insert(70, 0);
-    std::cout << std::endl;
-    list.pop_back();
-    std::cout << std::endl;
+    // list.pop_back();
+    // list.print_list();
+    list.remove(2); //  70->30->60->nullptr
     list.print_list();
-    list.remove(2);
     // int key;
     // std::cout << "Enter element you wanna search for : ";
     // std::cin >> key;
