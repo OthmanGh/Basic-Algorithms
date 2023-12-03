@@ -1,6 +1,37 @@
 # Data Structures :
 
-## 1- Linked List
+## 1- Array
+
+An array is a data structure that stores a collection of elements, each identified by an index or a key. The elements in an array are stored in contiguous memory locations, and their order is typically determined by their index. Arrays provide fast and direct access to elements based on their index.
+
+## Key Characteristics of Arrays:
+
+- **Fixed Size:** Arrays have a fixed size, meaning the number of elements they can hold is predetermined at the time of creation.
+
+- **Homogeneous Elements:** Elements in an array are of the same data type, ensuring uniformity in storage.
+
+- **Random Access:** Elements in an array can be accessed directly using their index, allowing for fast and constant-time access.
+
+## Example in Pseudo-code (Python-like syntax):
+
+```python
+# Declaration and initialization of an array
+myArray = [10, 20, 30, 40, 50]
+
+# Accessing elements by index
+print(myArray[2])  # Output: 30
+
+# Modifying an element
+myArray[3] = 60
+
+# Iterating through the array
+for element in myArray:
+    print(element)
+```
+
+In this example, myArray is an array containing five integers. Elements can be accessed or modified using their indices. Arrays are fundamental data structures used in various programming languages to organize and manipulate data efficiently.
+
+## 2- Linked List
 
 A linked list is a linear data structure consisting of nodes, where each node points to the next node in the sequence. Unlike arrays, linked lists do not have a fixed size in memory, and the elements can be scattered throughout the memory.
 
@@ -32,7 +63,7 @@ Linked lists are dynamic and provide flexibility in terms of memory usage. Howev
 
 ---
 
-## 2- Stack
+## 3- Stack
 
 A stack is a data structure that follows the Last In, First Out (LIFO) principle. In a stack, elements are added and removed from the same end, known as the "top" of the stack.
 
@@ -50,7 +81,7 @@ Think of it like a stack of plates where you can only add or remove plates from 
 
 ---
 
-## 3- Queue
+## 4- Queue
 
 A queue is a data structure that follows the First In, First Out (FIFO) principle. In a queue, elements are added at the rear (enqueue) and removed from the front (dequeue). The element that has been in the queue the longest is the first to be removed.
 
@@ -62,3 +93,9 @@ A queue is a data structure that follows the First In, First Out (FIFO) principl
 - **isEmpty:** Checking if the queue is empty.
 
 Think of it like people waiting in line; the first person to arrive is the first to leave the line. Queues are used in various computer science applications, such as process scheduling, print job management, and breadth-first search algorithms.
+
+---
+
+```
+
+```
