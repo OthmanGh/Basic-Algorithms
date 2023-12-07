@@ -20,12 +20,24 @@ class Queue
     Node<T> *rear;
 
 public:
-    Queue() : head(nullptr), rear(nullptr){};
+    Queue() : this->head(nullptr), this->rear(nullptr){};
     void enqueue(T);
     void dequeue();
-    int front();
+    T front();
     bool empty();
 };
 
 template <typename T>
-void Queue<T>::enqueue(T value){};
+void Queue<T>::enqueue(T value)
+{
+    Node<T> new_node = new Node(value);
+    if (this->head == nullptr)
+    {
+        this->head = this->rear = new_node;
+    }
+    else
+    {
+        this->rear.next = new_node;
+        this->rear = new_node;
+    }
+};
