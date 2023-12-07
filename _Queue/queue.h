@@ -30,14 +30,30 @@ public:
 template <typename T>
 void Queue<T>::enqueue(T value)
 {
-    Node<T> new_node = new Node(value);
+    Node<T> new_node = new Node<T>(value);
     if (this->head == nullptr)
     {
         this->head = this->rear = new_node;
     }
     else
     {
-        this->rear.next = new_node;
+        this->rear->next = new_node;
         this->rear = new_node;
+    }
+};
+
+template <typename T>
+void Queue<T>::dequeue()
+{
+    if (this->head == nullptr)
+    {
+        std::cout << "Queue is empty..." << std::endl;
+    }
+    else
+    {
+        Node<T> *temp = head;
+        this->head = head->next;
+        temp->next = nullptr;
+        delete temp;
     }
 };
