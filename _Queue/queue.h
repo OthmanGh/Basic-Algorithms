@@ -30,7 +30,7 @@ public:
 template <typename T>
 void Queue<T>::enqueue(T value)
 {
-    Node<T> new_node = new Node<T>(value);
+    Node<T> *new_node = new Node<T>(value);
     if (this->head == nullptr)
     {
         this->head = this->rear = new_node;
