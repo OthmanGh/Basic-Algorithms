@@ -4,6 +4,8 @@ using namespace std;
 
 int main()
 {
+    cout << "Starting the main function." << endl;
+
     // Testing with integers
     Queue<int> intQueue;
     intQueue.enqueue(10);
@@ -25,6 +27,8 @@ int main()
 
     stringQueue.dequeue();
     cout << "Front after dequeue: " << stringQueue.front() << endl;
+
+    cout << "Exiting the main function." << endl;
 
     return 0;
 }
