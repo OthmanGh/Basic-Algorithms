@@ -71,3 +71,9 @@ T Queue<T>::front()
         return this->head->data;
     }
 }
+
+template <typename T>
+bool Queue<T>::empty()
+{
+    return this->head == nullptr;
+}
