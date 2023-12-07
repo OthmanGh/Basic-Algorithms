@@ -9,8 +9,8 @@ class Node
     Node<T> *next;
 
 public:
-    Node(T d) : data(d), head(nullptr){};
-    friend class Queue;
+    Node(T d) : data(d), next(nullptr){};
+    friend class Queue<T>;
 };
 
 template <typename T>
@@ -20,7 +20,7 @@ class Queue
     Node<T> *rear;
 
 public:
-    Queue() : this->head(nullptr), this->rear(nullptr){};
+    Queue() : head(nullptr), rear(nullptr){};
     void enqueue(T);
     void dequeue();
     T front();
@@ -63,7 +63,7 @@ T Queue<T>::front()
 {
     if (this->head == nullptr)
     {
-        std::cout < "Queue is empty...." << std::endl;
+        std::cout << "Queue is empty...." << std::endl;
         return T();
     }
     else
