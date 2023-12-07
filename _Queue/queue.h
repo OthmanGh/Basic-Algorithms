@@ -57,3 +57,17 @@ void Queue<T>::dequeue()
         delete temp;
     }
 };
+
+template <typename T>
+T Queue<T>::front()
+{
+    if (this->head == nullptr)
+    {
+        std::cout < "Queue is empty...." << std::endl;
+        return T();
+    }
+    else
+    {
+        return this->head->data;
+    }
+}
