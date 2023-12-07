@@ -13,3 +13,16 @@ public:
     Node(T d) : data(d), head(nullptr){};
     friend class Queue;
 };
+
+template <typename T>
+class Queue
+{
+    Node *head;
+    Node *rear;
+
+public:
+    void enqueue(int);
+    void dequeue();
+    T front();
+    bool empty();
+};
