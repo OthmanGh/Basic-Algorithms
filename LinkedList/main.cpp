@@ -3,45 +3,43 @@
 
 int main()
 {
-    LinkedList list; // static object but the actual memory is dynamic
+    // Test with integer data type
+    LinkedList<int> intList;
+    intList.push_back(5);
+    intList.push_back(10);
+    intList.push_front(2);
+    intList.insert(7, 1);
+    intList.print_list();
 
-    list.push_back(10);
-    list.push_front(30);
-    list.push_back(20);
-    // list.push_front(40);
-    list.insert(60, 3);
-    // list.pop_front(); // 40 will get deleted from the list
-    list.insert(70, 0);
-    // list.pop_back();
-    // list.print_list();
-    list.remove(2); //  70->30->60->nullptr
-    list.print_list();
-    // int key;
-    // std::cout << "Enter element you wanna search for : ";
-    // std::cin >> key;
+    int searchResult = intList.linear_search(10);
+    std::cout << "Linear Search Result for 10: " << searchResult << std::endl;
 
-    // int idx1 = list.linear_search(key);
+    int recursiveSearchResult = intList.recursive_search(7);
+    std::cout << "Recursive Search Result for 7: " << recursiveSearchResult << std::endl;
 
-    // if (idx1 != -1)
-    // {
-    //     std::cout << "linear search : " << key << " is present at index " << idx1 << std::endl;
-    // }
-    // else
-    // {
-    //     std::cout << "linear search : " << key << " is not present in the list...." << std::endl;
-    // }
+    intList.pop_front();
+    intList.pop_back();
+    intList.print_list();
 
-    // int idx2 = list.recursive_search(key);
+    std::cout << "\n-----------------------------------\n";
 
-    // if (idx2 != -1)
-    // {
-    //     std::cout << "recursive search : " << key << " is present at index " << idx2 << std::endl;
-    // }
-    // else
-    // {
-    //     std::cout << "recursive search : " << key << " is not present in the list...." << std::endl;
-    // }
-    // std::cout << std::endl;
+    // Test with double data type
+    LinkedList<double> doubleList;
+    doubleList.push_back(3.14);
+    doubleList.push_back(2.718);
+    doubleList.push_front(1.1);
+    doubleList.insert(2.22, 1);
+    doubleList.print_list();
+
+    double searchResultDouble = doubleList.linear_search(2.718);
+    std::cout << "Linear Search Result for 2.718: " << searchResultDouble << std::endl;
+
+    double recursiveSearchResultDouble = doubleList.recursive_search(1.1);
+    std::cout << "Recursive Search Result for 1.1: " << recursiveSearchResultDouble << std::endl;
+
+    doubleList.pop_front();
+    doubleList.pop_back();
+    doubleList.print_list();
 
     return 0;
 }
