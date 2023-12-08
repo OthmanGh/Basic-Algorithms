@@ -1,29 +1,32 @@
 #pragma once
 
+template <typename T>
 class LinkedList;
 
+template <typename T>
 class Node // holds data value and a pointer to the next node element
 {
-    int data;
-    Node *next;
+    T data;
+    Node<T> *next;
 
 public:
-    Node(int d) : data(d), next(nullptr){}; // constructor initialization list
+    Node(T d) : data(d), next(nullptr){}; // constructor initialization list
 
-    friend LinkedList;
     // method
-    int getData();
-
+    T getData();
     // destructor:
     ~Node();
+    friend class LinkedList<T>;
 };
 
-int Node::getData()
+template <typename T>
+T Node<T>::getData()
 {
     return this->data;
 }
 
-Node::~Node()
+template <typename T>
+Node<T>::~Node()
 {
     if (this->next != nullptr) // this will make a recursive call for the next node
     {
@@ -32,59 +35,42 @@ Node::~Node()
     std::cout << "Deleting Node with data " << this->data << " " << std::endl;
 }
 
+template <typename T>
 class LinkedList
 {
-    Node *head;
-    Node *tail;
+    Node<T> *head;
+    Node<T> *tail;
 
     // private Methods :
-    int searchHelper(Node *start, int key)
-    {
-        // Base case
-        if (start == nullptr)
-        {
-            return -1;
-        }
-
-        // value matches
-        if (start->data == key)
-        {
-            return 0;
-        }
-
-        // remaining part of the linked list
-        int subIdx = searchHelper(start->next, key);
-
-        return subIdx == -1 ? -1 : subIdx + 1;
-    }
+    T search_helper(Node<T> *start, T key);
 
 public:
     // constructor:
     LinkedList() : head(nullptr), tail(nullptr){};
 
     // Methods :
-    void push_front(int);
-    void push_back(int);
-    void insert(int, int);
+    void push_front(T);
+    void push_back(T);
+    void insert(T, int);
     void pop_front();
     void pop_back();
     void remove(int);
     void print_list();
-    int linear_search(int);
-    int recursive_search(int);
+    T linear_search(T);
+    T recursive_search(T);
 
     // destructor :
     ~LinkedList();
 };
 
-void LinkedList::push_front(int value)
+template <typename T>
+void LinkedList<T>::push_front(T value)
 {
-    Node *n = new Node(value);
+    Node<T> *n = new Node<T>(value);
     if (this->head == nullptr)
     {
         // If the list is empty, set both head and tail to the new node
-        this->head = n;
-        this->tail = n;
+        this->head = this->tail = n;
     }
     else
     {
@@ -94,9 +80,10 @@ void LinkedList::push_front(int value)
     }
 }
 
-void LinkedList::push_back(int value)
+template <typename T>
+void LinkedList<T>::push_back(T value)
 {
-    Node *n = new Node(value);
+    Node<T> *n = new Node<T>(value);
 
     if (this->head == nullptr)
     {
@@ -110,8 +97,8 @@ void LinkedList::push_back(int value)
         this->tail = n;
     }
 }
-
-void LinkedList::insert(int data, int pos)
+template <typename T>
+void LinkedList<T>::insert(T data, int pos)
 {
     if (pos == 0)
     {
@@ -119,19 +106,26 @@ void LinkedList::insert(int data, int pos)
         return;
     }
     // Otherwise:
-    Node *temp = head;
+    Node<T> *temp = head;
     for (int jump = 1; jump < pos; jump++)
     {
+        if (temp == nullptr)
+        {
+            std::cout << "Invalid position." << std::endl;
+            return;
+        }
+
         temp = temp->next;
     }
 
-    Node *n = new Node(data);
+    Node<T> *n = new Node<T>(data);
 
     n->next = temp->next;
     temp->next = n;
 }
 
-void LinkedList::pop_front()
+template <typename T>
+void LinkedList<T>::pop_front()
 {
     // Check if list is empty
     if (this->head == nullptr)
@@ -149,7 +143,7 @@ void LinkedList::pop_front()
     }
 
     // Copy head in temporary memory
-    Node *temp = this->head;
+    Node<T> *temp = this->head;
 
     // Move head pointer to the next place
     this->head = this->head->next;
@@ -161,7 +155,8 @@ void LinkedList::pop_front()
     delete temp;
 }
 
-void LinkedList::pop_back()
+template <typename T>
+void LinkedList<T>::pop_back()
 {
     // Check if the list is empty
     if (this->head == nullptr)
@@ -179,7 +174,7 @@ void LinkedList::pop_back()
     }
 
     // Traverse the list to find the last element before the tail
-    Node *temp = this->head;
+    Node<T> *temp = this->head;
     while (temp->next->next != nullptr)
     {
         temp = temp->next;
@@ -191,32 +186,46 @@ void LinkedList::pop_back()
     this->tail = temp;    // Update the tail pointer
 }
 
-void LinkedList::remove(int pos = 0)
+template <typename T>
+void LinkedList<T>::remove(int pos)
 {
     // Check if list is empty
-    if (this->head == NULL)
+    if (this->head == nullptr)
     {
         std::cout << "Cannot remove from an empty list." << std::endl;
         return;
     }
 
+    if (pos == 0)
+    {
+        pop_front();
+        return;
+    }
+
     // Traverse the list to find last element before pos
-    Node *temp = this->head;
+    Node<T> *temp = this->head;
     int cnt = 0;
     while (cnt < pos - 1)
     {
+        if (temp == nullptr || temp->next == nullptr)
+        {
+            std::cout << "Invalid position." << std::endl;
+            return;
+        }
+
         temp = temp->next;
         cnt++;
     }
-    Node *removedNode = temp->next; // Store the node to be removed, to avoid memory leak
-    temp->next = temp->next->next;  // Adjust the pointers to remove the node from the list
-    removedNode->next = nullptr;    // Set the next pointer of removedNode to null (disconnect from the list)
-    delete removedNode;             // delete removedNode to free up the memory
+    Node<T> *removedNode = temp->next; // Store the node to be removed, to avoid memory leak
+    temp->next = temp->next->next;     // Adjust the pointers to remove the node from the list
+    removedNode->next = nullptr;       // Set the next pointer of removedNode to null (disconnect from the list)
+    delete removedNode;                // delete removedNode to free up the memory
 }
 
-int LinkedList::linear_search(int key)
+template <typename T>
+T LinkedList<T>::linear_search(T key)
 {
-    Node *temp = this->head;
+    Node<T> *temp = this->head;
     int idx = 0;
 
     while (temp != nullptr)
@@ -231,13 +240,37 @@ int LinkedList::linear_search(int key)
     return -1;
 }
 
-int LinkedList::recursive_search(int key)
+template <typename T>
+T LinkedList<T>::recursive_search(T key)
 {
-    int idx = searchHelper(this->head, key);
+    int idx = search_helper(this->head, key);
     return idx;
 }
 
-LinkedList::~LinkedList()
+template <typename T>
+T LinkedList<T>::search_helper(Node<T> *start, T key)
+{
+
+    // Base case
+    if (start == nullptr)
+    {
+        return -1;
+    }
+
+    // value matches
+    if (start->data == key)
+    {
+        return 0;
+    }
+
+    // remaining part of the linked list
+    int subIdx = search_helper(start->next, key);
+
+    return subIdx == -1 ? -1 : subIdx + 1;
+}
+
+template <typename T>
+LinkedList<T>::~LinkedList()
 {
     if (this->head != nullptr)
     {
@@ -246,9 +279,10 @@ LinkedList::~LinkedList()
     }
 }
 
-void LinkedList::print_list()
+template <typename T>
+void LinkedList<T>::print_list()
 {
-    Node *temp = this->head;
+    Node<T> *temp = this->head;
 
     if (temp == nullptr)
     {
