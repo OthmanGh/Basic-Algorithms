@@ -37,6 +37,32 @@ public:
 node *alternateMerge(node *root1, node *root2)
 {
     // Complete this function
+    if (root1 == NULL)
+    {
+        return root2;
+    }
+    else if (root2 == NULL)
+    {
+        return root1;
+    }
+
+    node *merged_head = root1;
+    node *temp1;
+    node *temp2;
+
+    while (root1 != NULL && root2 != NULL)
+    {
+        temp1 = root1->next;
+        temp2 = root2->next;
+
+        root1->next = root2;
+        root2->next = temp1;
+
+        // update :
+        root1 = temp1;
+        root2 = temp2;
+    }
+    return merged_head;
 }
 
 // Function to print the linked list
