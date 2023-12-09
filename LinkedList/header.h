@@ -55,6 +55,7 @@ public:
     void pop_front();
     void pop_back();
     void remove(int);
+    void reverse_ll_iterative();
     void print_list();
     T linear_search(T);
     T recursive_search(T);
@@ -250,7 +251,6 @@ T LinkedList<T>::recursive_search(T key)
 template <typename T>
 T LinkedList<T>::search_helper(Node<T> *start, T key)
 {
-
     // Base case
     if (start == nullptr)
     {
@@ -267,6 +267,31 @@ T LinkedList<T>::search_helper(Node<T> *start, T key)
     int subIdx = search_helper(start->next, key);
 
     return subIdx == -1 ? -1 : subIdx + 1;
+}
+
+template <typename T>
+void LinkedList<T>::reverse_ll_iterative()
+{
+    if (head == nullptr)
+    {
+        std::cout << "Can't reverse an empty list..." << std::endl;
+        return;
+    }
+
+    Node<T> *c = this->head;
+    Node<T> *prev = nullptr;
+    Node<T> *n;
+
+    while (c != nullptr)
+    {
+        n = c->next;
+        c->next = prev;
+
+        // update :
+        prev = c;
+        c = n;
+    }
+    this->head = prev;
 }
 
 template <typename T>
