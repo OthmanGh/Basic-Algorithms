@@ -40,13 +40,13 @@ class LinkedList
 {
     Node<T> *head;
     Node<T> *tail;
-
+    int len;
     // private Methods :
     T search_helper(Node<T> *start, T key);
 
 public:
     // constructor:
-    LinkedList() : head(nullptr), tail(nullptr){};
+    LinkedList() : head(nullptr), tail(nullptr), len(0){};
 
     // Methods :
     void push_front(T);
@@ -72,12 +72,14 @@ void LinkedList<T>::push_front(T value)
     {
         // If the list is empty, set both head and tail to the new node
         this->head = this->tail = n;
+        this->len = 1;
     }
     else
     {
         // If the list is not empty, update the pointers to insert at the front
         n->next = this->head;
         this->head = n;
+        this->len += 1;
     }
 }
 
@@ -90,12 +92,14 @@ void LinkedList<T>::push_back(T value)
     {
         // If the list is empty, set both head and tail to the new node
         this->head = this->tail = n;
+        this->len = 1;
     }
     else
     {
         // If the list is not empty, update the pointers to insert at the back
         this->tail->next = n;
         this->tail = n;
+        this->len += 1;
     }
 }
 template <typename T>
@@ -123,6 +127,7 @@ void LinkedList<T>::insert(T data, int pos)
 
     n->next = temp->next;
     temp->next = n;
+    this->len = 1;
 }
 
 template <typename T>
@@ -323,4 +328,7 @@ void LinkedList<T>::print_list()
         }
         std::cout << "nullptr" << std::endl;
     }
+
+    std::cout << "LinkedList Length: " << this->len << std::endl;
+    std::cout << std::endl;
 }
