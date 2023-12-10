@@ -2,7 +2,21 @@
 #include <stack>
 
 // Challenge: Insert at Stack Bottom
-void insertAtBottom(std::stack<int> &s, int data) {}
+void insertAtBottom(std::stack<int> &s, int data)
+{
+    // Base Case :
+    if (s.empty())
+    {
+        s.push(data);
+        return;
+    }
+
+    int temp = s.top();
+    s.pop();
+    // recursive case :
+    insertAtBottom(s, data);
+    s.push(temp);
+}
 
 int main()
 {
@@ -14,5 +28,10 @@ int main()
 
     insertAtBottom(s, 5);
 
+    while (!s.empty())
+    {
+        std::cout << s.top() << std::endl;
+        s.pop();
+    }
     return 0;
 }
